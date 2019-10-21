@@ -8,17 +8,17 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 
 class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
-    override fun onCreate (db: SQLiteDatabase?) {
-        val CREATE_TABLE: String = "CREATE TABLE STABLE_NAME" +
+    override fun onCreate(db: SQLiteDatabase?) {
+        val CREATE_TABLE = "CREATE TABLE $TABLE_NAME" +
                 "($COLUMN_ID TEXT PRIMARY KEY, $COLUMN_NAME TEXT, $COLUMN_AGE Integer)"
         db?.execSQL(CREATE_TABLE)
 
-        val sqlInsert: String = "INSERT INTO STABLE_NAME VALUES ('1', 'Alice',20)"
+        val sqlInsert :String = "INSERT INTO $TABLE_NAME VALUES('1', 'Alice',20)"
         db?.execSQL(sqlInsert);
     }
 
-    override fun onUpgrade (db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS STABLE_NAME")
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
